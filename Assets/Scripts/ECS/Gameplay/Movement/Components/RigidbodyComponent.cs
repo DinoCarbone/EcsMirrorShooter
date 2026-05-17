@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace ECS.Gameplay.Movement.Components
 {
-    public struct VelocityComponent
+    [Serializable]
+    public struct RigidbodyComponent
     {
-        public Vector3 Value;
+        public Rigidbody Value;
     }
 }

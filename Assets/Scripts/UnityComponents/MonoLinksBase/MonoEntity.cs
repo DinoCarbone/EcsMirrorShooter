@@ -1,17 +1,17 @@
 using Leopotam.Ecs;
-using UnityComponents.MonoLinksBase;
+using UnityEngine;
 
-namespace UnityCohimponents.MonoLinksBase
+namespace UnityComponents.MonoLinksBase
 {
     public class MonoEntity : MonoLinkBase
     {
-        private EcsEntity _entity;
-        
-        private MonoLinkBase[] _monoLinks;
+        private EcsEntity entity;
 
-        public MonoLink<T> Get<T>() where T: struct
+        private MonoLinkBase[] monoLinks;
+
+        public MonoLink<T> Get<T>() where T : struct
         {
-            foreach (MonoLinkBase link in _monoLinks)
+            foreach (MonoLinkBase link in monoLinks)
             {
                 if (link is MonoLink<T> monoLink)
                 {
@@ -21,18 +21,19 @@ namespace UnityCohimponents.MonoLinksBase
 
             return null;
         }
-        
+
         public override void Make(ref EcsEntity entity)
         {
-            _entity = entity;
-            
-            _monoLinks = GetComponents<MonoLinkBase>();
-            foreach (MonoLinkBase monoLink in _monoLinks)
+            this.entity = entity;
+
+            monoLinks = GetComponents<MonoLinkBase>();
+            foreach (MonoLinkBase monoLink in monoLinks)
             {
                 if (monoLink is MonoEntity)
                 {
                     continue;
                 }
+
                 monoLink.Make(ref entity);
             }
         }

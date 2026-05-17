@@ -1,5 +1,4 @@
 using Leopotam.Ecs;
-using UnityCohimponents.MonoLinksBase;
 using UnityEngine;
 
 namespace UnityComponents.MonoLinksBase
