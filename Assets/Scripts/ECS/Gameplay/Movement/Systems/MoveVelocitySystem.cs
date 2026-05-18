@@ -6,7 +6,7 @@ namespace ECS.Gameplay.Movement.Systems
 {
     public class MoveVelocitySystem : IEcsRunSystem
     {
-        private EcsFilter<VelocityComponent, MoveInputComponent, MoveSpeedComponent> filter = null;
+        private EcsFilter<MovementVelocityComponent, MoveInputComponent, MoveSpeedComponent> filter = null;
         
         public void Run()
         {

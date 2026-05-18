@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ECS.Gameplay.Movement.Components
 {
-    public struct VelocityComponent
+    public struct MovementVelocityComponent
     {
         public Vector3 Value;
     }

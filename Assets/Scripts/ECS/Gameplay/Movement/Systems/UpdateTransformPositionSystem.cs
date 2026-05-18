@@ -6,7 +6,7 @@ namespace ECS.Gameplay.Movement.Systems
 {
     public class UpdateTransformPositionSystem : IEcsRunSystem
     {
-        private EcsFilter<TransformComponent, VelocityComponent> filter = null;
+        private EcsFilter<TransformComponent, MovementVelocityComponent> filter = null;
 
         public void Run()
         {

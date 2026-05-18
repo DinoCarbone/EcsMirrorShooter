@@ -19,9 +19,13 @@ namespace ECS.Startup
             systems = new EcsSystems(world);
 
             systems
-                .Add(new PlayerInputSystem())
+                .Add(new PlayertInputMovementSystem())
                 .Add(new MoveVelocitySystem())
-                .Add(new UpdateTransformPositionSystem());
+                .Add(new PlayertInputJumpSystem())
+                .Add(new JumpVelocitySystem())
+                .Add(new JumpForceSystem())
+                .Add(new GroundCheckSystem());
+                
 
             systems.Init();
 

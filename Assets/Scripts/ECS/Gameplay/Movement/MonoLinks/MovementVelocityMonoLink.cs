@@ -3,5 +3,5 @@ using UnityComponents.MonoLinksBase;
 
 namespace ECS.Gameplay.Movement.MonoLinks
 {
-    public class VelocityMonoLink : MonoLink<VelocityComponent>{}
+    public class MovementVelocityMonoLink : MonoLink<MovementVelocityComponent>{}
 }

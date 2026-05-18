@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4477911494716488139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9166018774338188526}
+  m_Layer: 0
+  m_Name: GroundPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9166018774338188526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477911494716488139}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.495, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6549013612486711212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8332472333706789110
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,13 +43,17 @@ GameObject:
   - component: {fileID: 6136747752135588722}
   - component: {fileID: 6787073827658916210}
   - component: {fileID: 6054700808925545431}
+  - component: {fileID: -9129960017411994850}
   - component: {fileID: 2526799420097328590}
   - component: {fileID: 4432778833533112576}
   - component: {fileID: 6403535630562614634}
   - component: {fileID: 3966229686873533924}
   - component: {fileID: -1713991036098157366}
-  - component: {fileID: -9129960017411994850}
   - component: {fileID: 1648515288819229029}
+  - component: {fileID: 3909481051465401217}
+  - component: {fileID: 6283816685546362944}
+  - component: {fileID: 4638038329038359070}
+  - component: {fileID: 5944287195475546143}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -38,7 +73,8 @@ Transform:
   m_LocalPosition: {x: 0.5, y: 0.35, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9166018774338188526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6136747752135588722
@@ -105,7 +141,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8332472333706789110}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3686a12f644dd4d83b294b535f629c0d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -119,6 +155,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &-9129960017411994850
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332472333706789110}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!114 &2526799420097328590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.MoveSpeedMonoLink
   Value:
-    Value: 200
+    Value: 500
 --- !u!114 &-1713991036098157366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,33 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47cc0db841e0413793f3d131a70a02a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.PlayerTagMonoLink
---- !u!54 &-9129960017411994850
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8332472333706789110}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1648515288819229029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,3 +258,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.RigidbodyMonoLink
   Value:
     Value: {fileID: -9129960017411994850}
+--- !u!114 &3909481051465401217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332472333706789110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f52a5978d354507a9110b1a40aac388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.JumpInputMonoLink
+--- !u!114 &6283816685546362944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332472333706789110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d034c09e2cd0417a87c42c36a4fe1d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.GroundCheckMonoLink
+  Value:
+    GroundCheckPoint: {fileID: 9166018774338188526}
+    IsGrounded: 0
+--- !u!114 &4638038329038359070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332472333706789110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f056ed360414d23a71744bef084b8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.JumpForceMonoLink
+  Value:
+    Value: 5
+--- !u!114 &5944287195475546143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332472333706789110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc135b71a4d4e4a8aa00de313021bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.JumpVelocityMonoLink

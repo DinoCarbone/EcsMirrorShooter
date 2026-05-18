@@ -6,7 +6,7 @@ namespace ECS.Gameplay.Movement.Systems
 {
     public class UpdateRigidbodyPositionSystem : IEcsRunSystem
     {
-        private EcsFilter<RigidbodyComponent, VelocityComponent> filter = null;
+        private EcsFilter<RigidbodyComponent, MovementVelocityComponent> filter = null;
 
         public void Run()
         {

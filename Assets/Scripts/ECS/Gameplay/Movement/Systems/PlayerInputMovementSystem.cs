@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ECS.Gameplay.Movement.Systems
 {
-    public class PlayerInputSystem : IEcsRunSystem
+    public class PlayertInputMovementSystem : IEcsRunSystem
     {
         private EcsFilter<PlayerTag, MoveInputComponent> filter = null;
 
