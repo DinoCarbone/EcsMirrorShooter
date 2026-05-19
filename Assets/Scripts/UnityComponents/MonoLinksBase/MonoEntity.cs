@@ -26,7 +26,7 @@ namespace UnityComponents.MonoLinksBase
         {
             this.entity = entity;
 
-            monoLinks = GetComponents<MonoLinkBase>();
+            monoLinks = GetComponentsInChildren<MonoLinkBase>();
             foreach (MonoLinkBase monoLink in monoLinks)
             {
                 if (monoLink is MonoEntity)

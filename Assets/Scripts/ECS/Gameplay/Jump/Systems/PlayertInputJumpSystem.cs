@@ -1,9 +1,10 @@
+using ECS.Gameplay.Jump.Components;
 using ECS.Gameplay.Movement.Components;
 using ECS.Gameplay.Tags;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace ECS.Gameplay.Movement.Systems
+namespace ECS.Gameplay.Jump.Systems
 {
     public class PlayertInputJumpSystem : IEcsRunSystem
     {

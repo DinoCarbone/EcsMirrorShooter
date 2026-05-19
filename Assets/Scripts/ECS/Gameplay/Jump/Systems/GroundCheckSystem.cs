@@ -1,8 +1,9 @@
+using ECS.Gameplay.Jump.Components;
 using ECS.Gameplay.Movement.Components;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace ECS.Gameplay.Movement.Systems
+namespace ECS.Gameplay.Jump.Systems
 {
     public class GroundCheckSystem : IEcsRunSystem
     {

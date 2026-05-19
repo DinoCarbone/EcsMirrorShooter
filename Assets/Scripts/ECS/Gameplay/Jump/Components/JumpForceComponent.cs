@@ -1,6 +1,6 @@
 using System;
 
-namespace ECS.Gameplay.Movement.Components
+namespace ECS.Gameplay.Jump.Components
 {
     [Serializable]
     public struct JumpForceComponent

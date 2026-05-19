@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace UnityComponents.MonoLinksBase
 {
-    [RequireComponent(typeof(MonoEntity))]
     public class MonoLink<T> : MonoLinkBase where T : struct
     {
         public T Value;
