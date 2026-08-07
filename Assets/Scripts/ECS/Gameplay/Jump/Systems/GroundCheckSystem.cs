@@ -27,7 +27,6 @@ namespace ECS.Gameplay.Jump.Systems
 
                 // Выполняем рейкаст
                 groundCheck.IsGrounded = Physics.Raycast(rayStart, rayDirection, rayLength);
-                Debug.Log(groundCheck.IsGrounded);
             }
         }
     }
