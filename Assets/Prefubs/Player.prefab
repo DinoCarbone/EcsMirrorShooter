@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 4527298793767102594}
   - component: {fileID: 2068580043841733936}
   - component: {fileID: -3844839895712482026}
+  - component: {fileID: 1833478861313775622}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -373,6 +374,21 @@ MonoBehaviour:
   rotationSensitivity: 0.01
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &1833478861313775622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332472333706789110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2937a970e850c6fb2a07de40169a3c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Networking.Mirror.MirrorEcsEntityInitializer
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &8646676524793578999
 GameObject:
   m_ObjectHideFlags: 0

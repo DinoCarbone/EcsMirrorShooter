@@ -1,87 +1,54 @@
+using System;
 using ECS.Gameplay.Jump.Systems;
 using ECS.Gameplay.Movement.Systems;
 using Leopotam.Ecs;
-using UnityComponents.MonoLinksBase;
-using UnityEngine;
+using Zenject;
 
 namespace ECS.Startup
 {
-    public class EcsStartup : MonoBehaviour
+    public class EcsStartup : IEcsWorldProvider, IInitializable, ITickable, IFixedTickable, IDisposable
     {
-        [SerializeField] private GameObject playerPrefab;
-
-        private EcsWorld world;
+        private readonly EcsWorld world = new();
         private EcsSystems systems;
         private EcsSystems fixedSystems;
 
-        private void Start()
-        {
-            world = new EcsWorld();
-            systems = new EcsSystems(world);
+        public EcsWorld World => world;
 
-            systems
+        public void Initialize()
+        {
+            systems = new EcsSystems(world)
                 .Add(new PlayertInputMovementSystem())
                 .Add(new MoveVelocitySystem())
                 .Add(new PlayertInputJumpSystem())
                 .Add(new JumpVelocitySystem())
                 .Add(new JumpForceSystem())
                 .Add(new GroundCheckSystem());
-                
-
             systems.Init();
 
-            fixedSystems = new EcsSystems(world);
-            fixedSystems.Add(new UpdateRigidbodyPositionSystem());
-            
+            fixedSystems = new EcsSystems(world)
+                .Add(new UpdateRigidbodyPositionSystem());
             fixedSystems.Init();
-
-            SpawnPlayer();
         }
 
-        private void SpawnPlayer()
+        public void Tick()
         {
-            if (playerPrefab == null)
-            {
-                Debug.LogError("Player prefab is not assigned in the inspector!");
-                return;
-            }
-
-            var playerInstance = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            var monoEntity = playerInstance.GetComponent<MonoEntity>();
-            if (monoEntity == null) 
-                return;
-            EcsEntity ecsEntity = world.NewEntity();
-            monoEntity.Make(ref ecsEntity);
+            systems.Run();
         }
 
-        private void Update()
+        public void FixedTick()
         {
-            if (systems != null)
-            {
-                systems.Run();
-            }
-        }
-        private void FixedUpdate()
-        {
-            if (fixedSystems != null)
-            {
-                fixedSystems.Run();
-            }
+            fixedSystems.Run();
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
-            if (systems != null)
-            {
-                systems.Destroy();
-                systems = null;
-            }
+            fixedSystems?.Destroy();
+            fixedSystems = null;
 
-            if (world != null)
-            {
-                world.Destroy();
-                world = null;
-            }
+            systems?.Destroy();
+            systems = null;
+
+            world.Destroy();
         }
     }
 }
