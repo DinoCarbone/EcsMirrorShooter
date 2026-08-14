@@ -1,6 +1,8 @@
 using System;
+using ECS.Gameplay.Movement.Components;
 using ECS.Gameplay.Shooting.Interfaces;
 using ECS.Startup;
+using UnityComponents.MonoLinksBase;
 using UnityEngine;
 
 namespace ECS.Gameplay.Shooting.Systems
@@ -19,11 +21,24 @@ namespace ECS.Gameplay.Shooting.Systems
             {
                 throw new ArgumentNullException(nameof(bulletPrefab));
             }
-            
-            return ecsEntityFactory.Create<GameObject>(
+            GameObject bulletObject = ecsEntityFactory.Create<GameObject>(
                 bulletPrefab,
                 position,
                 rotation);
+
+            if (bulletObject.TryGetComponent(out MonoEntity monoEntity))
+            {
+                monoEntity.Set(new MoveInputComponent
+                {
+                    Value = Vector2.up
+                });
+            }
+            else
+            {
+                Debug.LogWarning("Bullet object has no MonoEntity component");
+            }
+
+            return bulletObject;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ECS.Gameplay.Movement.Systems
                 Vector3 direction = new Vector3(input.x, 0, input.y);
                 
                 ref var moveComponent = ref filter.Get1(index);
-                moveComponent.Value = direction * speed * Time.deltaTime;
+                moveComponent.Value = direction * speed;
             }
         }
     }

@@ -15,7 +15,7 @@ namespace ECS.Gameplay.Movement.Systems
                 Transform transform = filter.Get1(i).Value;
                 Vector3 velocity = filter.Get2(i).Value;
 
-                transform.position += velocity;
+                transform.position += velocity * Time.deltaTime;
             }
         }
     }

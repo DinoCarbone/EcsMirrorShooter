@@ -23,6 +23,16 @@ namespace UnityComponents.MonoLinksBase
             return null;
         }
 
+        public void Set<T>(T component) where T : struct
+        {
+            if (!entity.IsAlive())
+            {
+                throw new InvalidOperationException("MonoEntity is not bound to an alive ECS entity.");
+            }
+
+            entity.Get<T>() = component;
+        }
+
         public override void Make(ref EcsEntity entity)
         {
             if (!entity.IsAlive())
