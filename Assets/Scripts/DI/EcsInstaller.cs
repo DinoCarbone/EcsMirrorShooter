@@ -1,3 +1,5 @@
+using ECS.Gameplay.Shooting.Interfaces;
+using ECS.Gameplay.Shooting.Systems;
 using ECS.Startup;
 using Zenject;
 
@@ -7,8 +9,10 @@ namespace DI
     {
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<EcsWorldProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<EcsStartup>().AsSingle();
             Container.Bind<IEcsEntityFactory>().To<EcsEntityFactory>().AsSingle();
+            Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
         }
     }
 }

@@ -88,6 +88,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc135b71a4d4e4a8aa00de313021bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Jump.MonoLinks.JumpVelocityMonoLink
+--- !u!1 &2093337831134382351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8825682835382533453}
+  m_Layer: 0
+  m_Name: Shoot point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8825682835382533453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093337831134382351}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6549013612486711212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4208728157984185827
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +151,7 @@ Transform:
   m_Children:
   - {fileID: 6568666311625953939}
   - {fileID: 2586665987205756574}
+  - {fileID: 4511232949294106036}
   m_Father: {fileID: 6549013612486711212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567154175261554944
@@ -165,6 +197,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6549013612486711212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6441534221605337385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4511232949294106036}
+  - component: {fileID: 5679493588060086863}
+  - component: {fileID: 5473187365620876292}
+  - component: {fileID: 2789352165487319406}
+  m_Layer: 0
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4511232949294106036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441534221605337385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2579285505575386867}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5679493588060086863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441534221605337385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c7f249072d4ea3a227daf139621ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Shooting.MonoLinks.ShootInputMonoLink
+--- !u!114 &5473187365620876292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441534221605337385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7bbfbb0b47a4b37a9238fdcf3aa78f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Shooting.MonoLinks.BulletSpawnPointMonoLink
+  Value:
+    Value: {fileID: 8825682835382533453}
+--- !u!114 &2789352165487319406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441534221605337385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f7ef45328b4dc69bf830e52f81f592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Shooting.MonoLinks.BulletPrefabMonoLink
+  Value:
+    Value: {fileID: 5763204941002976731, guid: 3feeb399dee524cd1a5f1620ff41b9bf, type: 3}
 --- !u!1 &8332472333706789110
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +310,7 @@ Transform:
   m_Children:
   - {fileID: 2579285505575386867}
   - {fileID: 9166018774338188526}
+  - {fileID: 8825682835382533453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6136747752135588722
@@ -385,7 +492,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2937a970e850c6fb2a07de40169a3c89, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Networking.Mirror.MirrorEcsEntityInitializer
+  m_EditorClassIdentifier: Assembly-CSharp::Networking.Mirror.Initialization.MirrorEcsEntityInitializer
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
@@ -402,6 +509,7 @@ GameObject:
   - component: {fileID: 4510414682117782228}
   - component: {fileID: 7958877858887421982}
   - component: {fileID: 247512759930558865}
+  - component: {fileID: 8645794317802386412}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -476,3 +584,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.RigidbodyMonoLink
   Value:
     Value: {fileID: -9129960017411994850}
+--- !u!114 &8645794317802386412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8646676524793578999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ea7e88ac404e7a923b199c709e4207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Movement.MonoLinks.TransformMonoLink
+  Value:
+    Value: {fileID: 6549013612486711212}

@@ -21,8 +21,8 @@ namespace ECS.Startup
 
         public EcsEntity Create(GameObject prefab, Vector3 position, Quaternion rotation)
         {
-            MonoEntity monoEntity = CreateMonoEntity(prefab, position, rotation);
-            return MakeEntity(monoEntity);
+            GameObject instance = CreatePrefab(prefab, position, rotation);
+            return MakeEntityIfPresent(instance);
         }
 
         public EcsEntity Create(GameObject prefab, Transform spawnPoint)
@@ -38,25 +38,27 @@ namespace ECS.Startup
         public T Create<T>(GameObject prefab, Vector3 position, Quaternion rotation)
             where T : UnityEngine.Object
         {
-            MonoEntity monoEntity = CreateMonoEntity(prefab, position, rotation);
-            MakeEntity(monoEntity);
-
-            if (typeof(T) == typeof(GameObject))
-            {
-                return (T)(UnityEngine.Object)monoEntity.gameObject;
-            }
-
-            if (!typeof(Component).IsAssignableFrom(typeof(T)))
+            Type requestedType = typeof(T);
+            if (requestedType != typeof(GameObject) &&
+                !typeof(Component).IsAssignableFrom(requestedType))
             {
                 throw new InvalidOperationException(
-                    $"Type {typeof(T).Name} must be {nameof(GameObject)} or a {nameof(Component)}.");
+                    $"Type {requestedType.Name} must be {nameof(GameObject)} or a {nameof(Component)}.");
             }
 
-            T component = monoEntity.GetComponentInChildren(typeof(T), true) as T;
+            GameObject instance = CreatePrefab(prefab, position, rotation);
+            MakeEntityIfPresent(instance);
+
+            if (requestedType == typeof(GameObject))
+            {
+                return (T)(UnityEngine.Object)instance;
+            }
+
+            T component = instance.GetComponentInChildren(requestedType, true) as T;
             if (component == null)
             {
                 throw new InvalidOperationException(
-                    $"Prefab '{prefab.name}' does not contain component {typeof(T).Name}.");
+                    $"Prefab '{prefab.name}' does not contain component {requestedType.Name}.");
             }
 
             return component;
@@ -71,7 +73,7 @@ namespace ECS.Startup
             return Create<T>(prefab, position, rotation);
         }
 
-        private MonoEntity CreateMonoEntity(
+        private GameObject CreatePrefab(
             GameObject prefab,
             Vector3 position,
             Quaternion rotation)
@@ -81,19 +83,22 @@ namespace ECS.Startup
                 throw new ArgumentNullException(nameof(prefab));
             }
 
-            MonoEntity monoEntity = instantiator.InstantiatePrefabForComponent<MonoEntity>(
+            return instantiator.InstantiatePrefab(
                 prefab,
                 position,
                 rotation,
                 null);
+        }
 
+        private EcsEntity MakeEntityIfPresent(GameObject instance)
+        {
+            MonoEntity monoEntity = instance.GetComponentInChildren<MonoEntity>(true);
             if (monoEntity == null)
             {
-                throw new InvalidOperationException(
-                    $"Prefab '{prefab.name}' does not contain {nameof(MonoEntity)}.");
+                return EcsEntity.Null;
             }
 
-            return monoEntity;
+            return MakeEntity(monoEntity);
         }
 
         private EcsEntity MakeEntity(MonoEntity monoEntity)

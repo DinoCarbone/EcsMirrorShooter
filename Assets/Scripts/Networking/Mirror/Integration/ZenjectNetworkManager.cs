@@ -1,9 +1,9 @@
 using ECS.Startup;
-using Mirror;
+using global::Mirror;
 using UnityEngine;
 using Zenject;
 
-namespace Networking.Mirror
+namespace Networking.Mirror.Integration
 {
     public class ZenjectNetworkManager : NetworkManager
     {

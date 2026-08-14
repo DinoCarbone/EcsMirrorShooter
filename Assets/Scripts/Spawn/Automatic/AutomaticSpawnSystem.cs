@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ECS.Startup;
+using UnityEngine;
 using Zenject;
 
 namespace Spawn.Automatic

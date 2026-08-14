@@ -1,31 +1,47 @@
 using System;
 using ECS.Gameplay.Jump.Systems;
 using ECS.Gameplay.Movement.Systems;
+using ECS.Gameplay.Shooting.Components;
+using ECS.Gameplay.Shooting.Interfaces;
+using ECS.Gameplay.Shooting.Systems;
 using Leopotam.Ecs;
 using Zenject;
 
 namespace ECS.Startup
 {
-    public class EcsStartup : IEcsWorldProvider, IInitializable, ITickable, IFixedTickable, IDisposable
+    public class EcsStartup : IInitializable, ITickable, IFixedTickable, IDisposable
     {
-        private readonly EcsWorld world = new();
+        private readonly IEcsWorldProvider worldProvider;
+        private IBulletSpawner bulletSpawner;
         private EcsSystems systems;
         private EcsSystems fixedSystems;
 
-        public EcsWorld World => world;
+        public EcsStartup(IEcsWorldProvider worldProvider)
+        {
+            this.worldProvider = worldProvider;
+        }
+
+        [Inject]
+        public void Construct(IBulletSpawner bulletSpawner)
+        {
+            this.bulletSpawner = bulletSpawner;
+        }
 
         public void Initialize()
         {
-            systems = new EcsSystems(world)
+            systems = new EcsSystems(worldProvider.World)
                 .Add(new PlayertInputMovementSystem())
                 .Add(new MoveVelocitySystem())
                 .Add(new PlayertInputJumpSystem())
+                .Add(new PlayerShootInputSystem())
+                .Add(new SpawnBulletSystem(bulletSpawner))
                 .Add(new JumpVelocitySystem())
                 .Add(new JumpForceSystem())
-                .Add(new GroundCheckSystem());
+                .Add(new GroundCheckSystem())
+                .OneFrame<SpawnBulletSignal>();
             systems.Init();
 
-            fixedSystems = new EcsSystems(world)
+            fixedSystems = new EcsSystems(worldProvider.World)
                 .Add(new UpdateRigidbodyPositionSystem());
             fixedSystems.Init();
         }
@@ -47,8 +63,6 @@ namespace ECS.Startup
 
             systems?.Destroy();
             systems = null;
-
-            world.Destroy();
         }
     }
 }

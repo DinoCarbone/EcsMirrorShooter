@@ -63,7 +63,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 8332472333706789110, guid: 142ac3badc6814d2db73cf7edc08c07f, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 5763204941002976731, guid: 3feeb399dee524cd1a5f1620ff41b9bf, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2

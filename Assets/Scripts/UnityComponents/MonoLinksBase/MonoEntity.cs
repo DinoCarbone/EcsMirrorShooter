@@ -1,3 +1,4 @@
+using System;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -24,6 +25,16 @@ namespace UnityComponents.MonoLinksBase
 
         public override void Make(ref EcsEntity entity)
         {
+            if (!entity.IsAlive())
+            {
+                throw new ArgumentException("Cannot bind MonoEntity to an entity that is not alive.", nameof(entity));
+            }
+
+            if (this.entity.IsAlive())
+            {
+                throw new InvalidOperationException("MonoEntity is already bound to an alive ECS entity.");
+            }
+
             this.entity = entity;
 
             monoLinks = GetComponentsInChildren<MonoLinkBase>();
@@ -36,6 +47,21 @@ namespace UnityComponents.MonoLinksBase
 
                 monoLink.Make(ref entity);
             }
+        }
+
+        private void DestroyEntity()
+        {
+            if (entity.IsAlive())
+            {
+                entity.Destroy();
+            }
+
+            entity = EcsEntity.Null;
+        }
+
+        private void OnDestroy()
+        {
+            DestroyEntity();
         }
     }
 }

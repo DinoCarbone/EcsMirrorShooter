@@ -5,7 +5,7 @@ using UnityComponents.MonoLinksBase;
 using UnityEngine;
 using Zenject;
 
-namespace Networking.Mirror
+namespace Networking.Mirror.Initialization
 {
     [RequireComponent(typeof(NetworkIdentity), typeof(MonoEntity))]
     public class MirrorEcsEntityInitializer : NetworkBehaviour
