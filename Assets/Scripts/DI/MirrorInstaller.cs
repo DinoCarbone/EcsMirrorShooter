@@ -1,3 +1,4 @@
+using System;
 using ECS.Common.Lifecycle.Interfaces;
 using ECS.Gameplay.Shooting.Interfaces;
 using Networking.Mirror.Lifecycle;
@@ -8,10 +9,9 @@ using Zenject;
 
 namespace DI
 {
-    public sealed class MirrorInstaller : MonoInstaller
+    public class MirrorInstaller : MonoInstaller
     {
         [SerializeField] private ZenjectNetworkManager networkManager;
-        [SerializeField] private MirrorBulletSpawnerDecorator bulletSpawner;
 
         public override void InstallBindings()
         {
@@ -19,18 +19,38 @@ namespace DI
                 .Decorate<IEntityDestroyer>()
                 .With<MirrorEntityDestroyerDecorator>();
 
+            Container.Bind<IMirrorServerHandler>()
+                .FromResolveGetter<IEntityDestroyer>(entityDestroyer =>
+                    GetServerHandler(entityDestroyer))
+                .AsCached();
+
             Container
                 .Decorate<IBulletSpawner>()
-                .With<MirrorBulletSpawnerDecorator>()
-                .FromMethod((_, originalSpawner) =>
-                {
+                .With<MirrorBulletSpawnerDecorator>();
 
-                    bulletSpawner.Construct(originalSpawner);
-                    return bulletSpawner;
-                });
+            Container.Bind<IMirrorServerHandler>()
+                .FromResolveGetter<IBulletSpawner>(bulletSpawner =>
+                    GetServerHandler(bulletSpawner))
+                .AsCached();
+
+            Container.Bind<IMirrorServerHandlersProxy>()
+                .To<MirrorServerHandlersProxy>()
+                .AsSingle();
 
             Container.BindInterfacesAndSelfTo<ZenjectNetworkManager>()
-                .FromNewComponentOnNewPrefab(networkManager).AsSingle().NonLazy();
+                .FromComponentInNewPrefab(networkManager).AsSingle().NonLazy();
+        }
+
+        private static IMirrorServerHandler GetServerHandler(object service)
+        {
+            if (service is IMirrorServerHandler handler)
+            {
+                return handler;
+            }
+
+            throw new InvalidOperationException(
+                $"{service?.GetType().Name ?? "Service"} does not implement " +
+                $"{nameof(IMirrorServerHandler)}.");
         }
     }
 }

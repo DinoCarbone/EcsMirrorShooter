@@ -1,42 +1,87 @@
+using System;
 using ECS.Gameplay.Shooting.Interfaces;
 using global::Mirror;
 using Networking.Mirror.Extensions;
+using Networking.Mirror.Integration;
 using UnityEngine;
 
 namespace Networking.Mirror.Shooting
 {
-    public class MirrorBulletSpawnerDecorator : NetworkBehaviour, IBulletSpawner
+    public class MirrorBulletSpawnerDecorator : IBulletSpawner, IMirrorServerHandler
     {
-        private IBulletSpawner bulletSpawner;
-
-        public void Construct(IBulletSpawner bulletSpawner)
+        private struct SpawnBulletMessage : NetworkMessage
         {
-            this.bulletSpawner = bulletSpawner;
+            public uint AssetId;
+            public Vector3 Position;
+            public Quaternion Rotation;
+        }
+
+        private readonly IBulletSpawner bulletSpawner;
+
+        public MirrorBulletSpawnerDecorator(IBulletSpawner bulletSpawner)
+        {
+            this.bulletSpawner = bulletSpawner ?? throw new ArgumentNullException(nameof(bulletSpawner));
         }
 
         public GameObject Spawn(GameObject bulletPrefab, Vector3 position, Quaternion rotation)
         {
-            var identity = bulletPrefab.GetComponent<NetworkIdentity>();
+            if (bulletPrefab == null)
+            {
+                throw new ArgumentNullException(nameof(bulletPrefab));
+            }
 
-            CmdSpawn(
-                identity.assetId,
-                position,
-                rotation);
+            if (!bulletPrefab.TryGetComponent(out NetworkIdentity identity))
+            {
+                throw new InvalidOperationException(
+                    $"Bullet prefab '{bulletPrefab.name}' has no {nameof(NetworkIdentity)} component.");
+            }
+
+            if (!NetworkClient.ready)
+            {
+                Debug.LogWarning("Cannot spawn a network bullet while the client is not ready.");
+                return null;
+            }
+
+            NetworkClient.Send(new SpawnBulletMessage
+            {
+                AssetId = identity.assetId,
+                Position = position,
+                Rotation = rotation
+            });
+
             return null;
         }
 
-        [Command(requiresAuthority = false)]
-        private void CmdSpawn(
-            uint assetId,
-            Vector3 position,
-            Quaternion rotation)
+        public void RegisterHandler()
         {
-            GameObject prefab = NetworkManager.singleton.GetPrefab(assetId);
+            NetworkServer.RegisterHandler<SpawnBulletMessage>(HandleSpawn);
+        }
+
+        public void UnregisterHandler()
+        {
+            NetworkServer.UnregisterHandler<SpawnBulletMessage>();
+        }
+
+        private void HandleSpawn(
+            NetworkConnectionToClient connection,
+            SpawnBulletMessage message)
+        {
+            if (!connection.isReady)
+            {
+                return;
+            }
+
+            GameObject prefab = NetworkManager.singleton.GetPrefab(message.AssetId);
+            if (prefab == null)
+            {
+                Debug.LogWarning($"Cannot spawn bullet: prefab with assetId={message.AssetId} is not registered.");
+                return;
+            }
 
             GameObject bullet = bulletSpawner.Spawn(
                 prefab,
-                position,
-                rotation);
+                message.Position,
+                message.Rotation);
 
             NetworkServer.Spawn(bullet);
         }

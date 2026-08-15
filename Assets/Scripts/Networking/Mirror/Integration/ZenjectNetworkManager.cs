@@ -1,4 +1,3 @@
-using ECS.Startup;
 using global::Mirror;
 using UnityEngine;
 using Zenject;
@@ -8,13 +7,27 @@ namespace Networking.Mirror.Integration
     public class ZenjectNetworkManager : NetworkManager
     {
         private IInstantiator instantiator;
-        private IEcsEntityFactory ecsEntityFactory;
+        private IMirrorServerHandlersProxy serverHandlersProxy;
 
         [Inject]
-        public void Construct(IInstantiator prefabInstantiator, IEcsEntityFactory ecsEntityFactory)
+        public void Construct(
+            IInstantiator prefabInstantiator,
+            IMirrorServerHandlersProxy serverHandlersProxy)
         {
             instantiator = prefabInstantiator;
-            this.ecsEntityFactory = ecsEntityFactory;
+            this.serverHandlersProxy = serverHandlersProxy;
+        }
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            serverHandlersProxy.RegisterHandlers();
+        }
+
+        public override void OnStopServer()
+        {
+            serverHandlersProxy.UnregisterHandlers();
+            base.OnStopServer();
         }
 
         public override void OnServerAddPlayer(NetworkConnectionToClient connection)
@@ -29,6 +42,7 @@ namespace Networking.Mirror.Integration
             NetworkServer.AddPlayerForConnection(connection, player);
             Debug.Log($"ZenjectNetworkManager.OnServerAddPlayer {player.name}");
         }
+
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -61,6 +75,5 @@ namespace Networking.Mirror.Integration
             
             Debug.Log($"ZenjectNetworkManager.RegisterZenjectPrefab {prefab.name}");
         }
-
     }
 }
