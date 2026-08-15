@@ -1,5 +1,5 @@
 using ECS.Gameplay.Shooting.Components;
-using ECS.Gameplay.Tags;
+using ECS.Common.Tags;
 using Leopotam.Ecs;
 using UnityEngine;
 

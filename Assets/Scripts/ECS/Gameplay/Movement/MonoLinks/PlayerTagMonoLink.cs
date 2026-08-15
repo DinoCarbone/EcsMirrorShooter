@@ -1,4 +1,4 @@
-using ECS.Gameplay.Tags;
+using ECS.Common.Tags;
 using UnityComponents.MonoLinksBase;
 
 namespace ECS.Gameplay.Movement.MonoLinks

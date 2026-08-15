@@ -1,4 +1,6 @@
 using System;
+using ECS.Common.Lifecycle.Interfaces;
+using ECS.Common.Lifecycle.Systems;
 using ECS.Gameplay.Jump.Systems;
 using ECS.Gameplay.Movement.Systems;
 using ECS.Gameplay.Shooting.Components;
@@ -13,6 +15,7 @@ namespace ECS.Startup
     {
         private readonly IEcsWorldProvider worldProvider;
         private IBulletSpawner bulletSpawner;
+        private IEntityDestroyer entityDestroyer;
         private EcsSystems systems;
         private EcsSystems fixedSystems;
 
@@ -22,9 +25,12 @@ namespace ECS.Startup
         }
 
         [Inject]
-        public void Construct(IBulletSpawner bulletSpawner)
+        public void Construct(
+            IBulletSpawner bulletSpawner,
+            IEntityDestroyer entityDestroyer)
         {
             this.bulletSpawner = bulletSpawner;
+            this.entityDestroyer = entityDestroyer;
         }
 
         public void Initialize()
@@ -38,6 +44,8 @@ namespace ECS.Startup
                 .Add(new JumpVelocitySystem())
                 .Add(new JumpForceSystem())
                 .Add(new GroundCheckSystem())
+                .Add(new LifetimeSystem())
+                .Add(new DestroyGameObjectSystem(entityDestroyer))
                 .OneFrame<SpawnBulletSignal>();
             systems.Init();
 

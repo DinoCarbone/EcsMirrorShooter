@@ -1,4 +1,5 @@
 using System;
+using ECS.Common.Lifecycle.Components;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace UnityComponents.MonoLinksBase
         {
             if (!entity.IsAlive())
             {
-                throw new InvalidOperationException("MonoEntity is not bound to an alive ECS entity.");
+                Debug.LogError("MonoEntity is not bound to an alive ECS entity.");
             }
 
             entity.Get<T>() = component;
@@ -46,6 +47,7 @@ namespace UnityComponents.MonoLinksBase
             }
 
             this.entity = entity;
+            entity.Get<GameObjectComponent>().Value = gameObject;
 
             monoLinks = GetComponentsInChildren<MonoLinkBase>();
             foreach (MonoLinkBase monoLink in monoLinks)

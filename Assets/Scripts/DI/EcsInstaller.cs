@@ -1,3 +1,5 @@
+using ECS.Common.Lifecycle.Interfaces;
+using ECS.Common.Lifecycle.Services;
 using ECS.Gameplay.Shooting.Interfaces;
 using ECS.Gameplay.Shooting.Systems;
 using ECS.Startup;
@@ -12,6 +14,7 @@ namespace DI
             Container.BindInterfacesAndSelfTo<EcsWorldProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<EcsStartup>().AsSingle();
             Container.Bind<IEcsEntityFactory>().To<EcsEntityFactory>().AsSingle();
+            Container.Bind<IEntityDestroyer>().To<UnityEntityDestroyer>().AsSingle();
             Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
         }
     }
