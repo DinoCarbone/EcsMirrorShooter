@@ -11,7 +11,7 @@ namespace DI
     public sealed class MirrorInstaller : MonoInstaller
     {
         [SerializeField] private ZenjectNetworkManager networkManager;
-        [SerializeField] private MirrorBulletSpawnerDecorator bulletSpawnerPrefab;
+        [SerializeField] private MirrorBulletSpawnerDecorator bulletSpawner;
 
         public override void InstallBindings()
         {
@@ -24,9 +24,6 @@ namespace DI
                 .With<MirrorBulletSpawnerDecorator>()
                 .FromMethod((_, originalSpawner) =>
                 {
-                    MirrorBulletSpawnerDecorator bulletSpawner =
-                        Container.InstantiatePrefabForComponent<MirrorBulletSpawnerDecorator>(
-                            bulletSpawnerPrefab);
 
                     bulletSpawner.Construct(originalSpawner);
                     return bulletSpawner;
