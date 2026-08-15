@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8825682835382533453}
   m_Layer: 0
-  m_Name: Shoot point
+  m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,6 +119,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6549013612486711212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4034449910768396123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5078111555372814501}
+  - component: {fileID: 902990643978286295}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5078111555372814501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034449910768396123}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2579285505575386867}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &902990643978286295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034449910768396123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ddd75b78db4f16a4e21911619826b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Camera.MonoLinks.CameraTargetMonoLink
+  Value:
+    Value: {fileID: 7419026303188001002}
 --- !u!1 &4208728157984185827
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +198,7 @@ Transform:
   - {fileID: 6568666311625953939}
   - {fileID: 2586665987205756574}
   - {fileID: 4511232949294106036}
+  - {fileID: 5078111555372814501}
   m_Father: {fileID: 6549013612486711212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567154175261554944
@@ -271,6 +318,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Shooting.MonoLinks.BulletPrefabMonoLink
   Value:
     Value: {fileID: 5763204941002976731, guid: 3feeb399dee524cd1a5f1620ff41b9bf, type: 3}
+--- !u!1 &7419026303188001001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7419026303188001002}
+  m_Layer: 0
+  m_Name: CameraTargetPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7419026303188001002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419026303188001001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6549013612486711212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8332472333706789110
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +368,7 @@ GameObject:
   - component: {fileID: 1833478861313775622}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,6 +389,7 @@ Transform:
   - {fileID: 2579285505575386867}
   - {fileID: 9166018774338188526}
   - {fileID: 8825682835382533453}
+  - {fileID: 7419026303188001002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6136747752135588722

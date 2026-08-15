@@ -1,6 +1,8 @@
 using System;
 using ECS.Common.Lifecycle.Interfaces;
 using ECS.Common.Lifecycle.Systems;
+using ECS.Gameplay.Camera.Interfaces;
+using ECS.Gameplay.Camera.Systems;
 using ECS.Gameplay.Jump.Systems;
 using ECS.Gameplay.Movement.Systems;
 using ECS.Gameplay.Shooting.Components;
@@ -14,28 +16,28 @@ namespace ECS.Startup
     public class EcsStartup : IInitializable, ITickable, IFixedTickable, IDisposable
     {
         private readonly IEcsWorldProvider worldProvider;
-        private IBulletSpawner bulletSpawner;
-        private IEntityDestroyer entityDestroyer;
+        private readonly IBulletSpawner bulletSpawner;
+        private readonly IEntityDestroyer entityDestroyer;
+        private readonly IPlayerCameraBinder playerCameraBinder;
         private EcsSystems systems;
         private EcsSystems fixedSystems;
 
-        public EcsStartup(IEcsWorldProvider worldProvider)
+        public EcsStartup(
+            IEcsWorldProvider worldProvider,
+            IBulletSpawner bulletSpawner,
+            IEntityDestroyer entityDestroyer,
+            IPlayerCameraBinder playerCameraBinder)
         {
             this.worldProvider = worldProvider;
-        }
-
-        [Inject]
-        public void Construct(
-            IBulletSpawner bulletSpawner,
-            IEntityDestroyer entityDestroyer)
-        {
             this.bulletSpawner = bulletSpawner;
             this.entityDestroyer = entityDestroyer;
+            this.playerCameraBinder = playerCameraBinder;
         }
 
         public void Initialize()
         {
             systems = new EcsSystems(worldProvider.World)
+                .Add(new BindPlayerCameraSystem(playerCameraBinder))
                 .Add(new PlayertInputMovementSystem())
                 .Add(new MoveVelocitySystem())
                 .Add(new PlayertInputJumpSystem())
