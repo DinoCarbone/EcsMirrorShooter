@@ -33,6 +33,10 @@ namespace DI
                     GetServerHandler(bulletSpawner))
                 .AsCached();
 
+            Container.Bind<IMirrorServerHandler>()
+                .To<MirrorCursorHandler>()
+                .AsSingle();
+
             Container.Bind<IMirrorServerHandlersProxy>()
                 .To<MirrorServerHandlersProxy>()
                 .AsSingle();
@@ -41,7 +45,7 @@ namespace DI
                 .FromComponentInNewPrefab(networkManager).AsSingle().NonLazy();
         }
 
-        private static IMirrorServerHandler GetServerHandler(object service)
+        private IMirrorServerHandler GetServerHandler(object service)
         {
             if (service is IMirrorServerHandler handler)
             {

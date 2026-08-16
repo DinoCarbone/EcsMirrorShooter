@@ -613,7 +613,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 907663443}
-  - {fileID: 907663444}
+  - {fileID: 907663445}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -885,7 +885,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         LegacyInput: Mouse X
-        LegacyGain: 300
+        LegacyGain: 350
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -896,7 +896,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         LegacyInput: Mouse Y
-        LegacyGain: -300
+        LegacyGain: -350
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -918,7 +918,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         LegacyInput: Mouse X
-        LegacyGain: 300
+        LegacyGain: 350
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -929,7 +929,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         LegacyInput: Mouse Y
-        LegacyGain: -300
+        LegacyGain: -350
         CancelDeltaTime: 0
       InputValue: 0
       Driver:

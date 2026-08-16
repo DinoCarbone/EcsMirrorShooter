@@ -2,6 +2,8 @@ using ECS.Common.Lifecycle.Interfaces;
 using ECS.Common.Lifecycle.Services;
 using ECS.Gameplay.Camera.Interfaces;
 using ECS.Gameplay.Camera.Services;
+using ECS.Gameplay.Cursor.Interfaces;
+using ECS.Gameplay.Cursor.Services;
 using ECS.Gameplay.Shooting.Interfaces;
 using ECS.Gameplay.Shooting.Systems;
 using ECS.Startup;
@@ -21,6 +23,7 @@ namespace DI
             Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
             Container.Bind<CinemachineCamera>().FromComponentInHierarchy().AsSingle();
             Container.Bind<IPlayerCameraBinder>().To<CinemachinePlayerCameraBinder>().AsSingle();
+            Container.Bind<ICursorController>().To<UnityCursorController>().AsSingle();
         }
     }
 }

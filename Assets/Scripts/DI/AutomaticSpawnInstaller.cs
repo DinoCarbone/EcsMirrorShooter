@@ -13,6 +13,7 @@ namespace DI
         {
             Container.Bind<IReadOnlyList<AutomaticSpawnEntry>>().FromInstance(entries);
             Container.BindInterfacesAndSelfTo<AutomaticSpawnSystem>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<AutomaticSpawnCursorInitializer>().AsSingle().NonLazy();
         }
     }
 }
