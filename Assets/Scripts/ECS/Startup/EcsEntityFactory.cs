@@ -1,6 +1,6 @@
 using System;
 using Leopotam.Ecs;
-using UnityComponents.MonoLinksBase;
+using ECS.Common.MonoLinksBase;
 using UnityEngine;
 using Zenject;
 

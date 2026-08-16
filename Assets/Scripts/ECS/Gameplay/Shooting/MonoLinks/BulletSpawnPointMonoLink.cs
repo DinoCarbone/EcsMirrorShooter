@@ -1,5 +1,5 @@
 using ECS.Gameplay.Shooting.Components;
-using UnityComponents.MonoLinksBase;
+using ECS.Common.MonoLinksBase;
 
 namespace ECS.Gameplay.Shooting.MonoLinks
 {

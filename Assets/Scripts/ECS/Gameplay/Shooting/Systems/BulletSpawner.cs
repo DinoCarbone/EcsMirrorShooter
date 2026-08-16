@@ -2,7 +2,7 @@ using System;
 using ECS.Gameplay.Movement.Components;
 using ECS.Gameplay.Shooting.Interfaces;
 using ECS.Startup;
-using UnityComponents.MonoLinksBase;
+using ECS.Common.MonoLinksBase;
 using UnityEngine;
 
 namespace ECS.Gameplay.Shooting.Systems

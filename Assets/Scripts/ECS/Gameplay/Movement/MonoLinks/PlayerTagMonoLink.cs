@@ -1,5 +1,5 @@
 using ECS.Common.Tags;
-using UnityComponents.MonoLinksBase;
+using ECS.Common.MonoLinksBase;
 
 namespace ECS.Gameplay.Movement.MonoLinks
 {

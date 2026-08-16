@@ -1,5 +1,5 @@
 using ECS.Common.Lifecycle.Components;
-using UnityComponents.MonoLinksBase;
+using ECS.Common.MonoLinksBase;
 
 namespace ECS.Common.Lifecycle.MonoLinks
 {

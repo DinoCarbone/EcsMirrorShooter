@@ -1,6 +1,6 @@
 using ECS.Gameplay.Jump.Components;
 using ECS.Gameplay.Movement.Components;
-using UnityComponents.MonoLinksBase;
+using ECS.Common.MonoLinksBase;
 
 namespace ECS.Gameplay.Jump.MonoLinks
 {

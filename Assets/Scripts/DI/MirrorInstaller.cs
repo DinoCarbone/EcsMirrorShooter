@@ -33,10 +33,6 @@ namespace DI
                     GetServerHandler(bulletSpawner))
                 .AsCached();
 
-            Container.Bind<IMirrorServerHandler>()
-                .To<MirrorCursorHandler>()
-                .AsSingle();
-
             Container.Bind<IMirrorServerHandlersProxy>()
                 .To<MirrorServerHandlersProxy>()
                 .AsSingle();

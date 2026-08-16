@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42829d794ebb41178f66ef11ac0f4f27, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnityComponents.MonoLinksBase.MonoEntity
+  m_EditorClassIdentifier: Assembly-CSharp::ECS.Common.MonoLinksBase.MonoEntity
 --- !u!114 &8048487819547710839
 MonoBehaviour:
   m_ObjectHideFlags: 0
