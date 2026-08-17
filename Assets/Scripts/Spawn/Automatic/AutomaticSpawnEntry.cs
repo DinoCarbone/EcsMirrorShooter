@@ -7,10 +7,11 @@ namespace Spawn.Automatic
     public class AutomaticSpawnEntry
     {
         [SerializeField] private GameObject prefab;
-        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private Vector3 spawnPoint;
+        [SerializeField] private Quaternion rotation;
 
         public GameObject Prefab => prefab;
-        public Vector3 Position => spawnPoint != null ? spawnPoint.position : Vector3.zero;
-        public Quaternion Rotation => spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
+        public Vector3 Position => spawnPoint != null ? spawnPoint : Vector3.zero;
+        public Quaternion Rotation => spawnPoint != null ? rotation : Quaternion.identity;
     }
 }

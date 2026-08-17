@@ -7,6 +7,13 @@ using ECS.Common.Cursor.Interfaces;
 using ECS.Common.Cursor.Systems;
 using ECS.Common.Menu.Interfaces;
 using ECS.Common.Menu.Systems;
+using ECS.Common.Collision.Components;
+using ECS.Gameplay.Damage.Components;
+using ECS.Gameplay.Damage.Interfaces;
+using ECS.Gameplay.Damage.Systems;
+using ECS.Gameplay.Health.Components;
+using ECS.Gameplay.Health.Interfaces;
+using ECS.Gameplay.Health.Systems;
 using ECS.Gameplay.Jump.Systems;
 using ECS.Gameplay.Movement.Systems;
 using ECS.Gameplay.Shooting.Components;
@@ -22,6 +29,8 @@ namespace ECS.Startup
         private readonly IEcsWorldProvider worldProvider;
         private readonly IBulletSpawner bulletSpawner;
         private readonly IEntityDestroyer entityDestroyer;
+        private readonly IDamageService damageService;
+        private readonly IUpdateHealthBarService updateHealthBarService;
         private readonly IPlayerCameraSystem playerCameraSystem;
         private readonly IPlayerCursorSystem playerCursorSystem;
         private readonly IPlayerMenuService playerMenuService;
@@ -32,6 +41,8 @@ namespace ECS.Startup
             IEcsWorldProvider worldProvider,
             IBulletSpawner bulletSpawner,
             IEntityDestroyer entityDestroyer,
+            IDamageService damageService,
+            IUpdateHealthBarService updateHealthBarService,
             IPlayerCameraSystem playerCameraSystem,
             IPlayerCursorSystem playerCursorSystem,
             IPlayerMenuService playerMenuService)
@@ -39,6 +50,8 @@ namespace ECS.Startup
             this.worldProvider = worldProvider;
             this.bulletSpawner = bulletSpawner;
             this.entityDestroyer = entityDestroyer;
+            this.damageService = damageService;
+            this.updateHealthBarService = updateHealthBarService;
             this.playerCameraSystem = playerCameraSystem;
             this.playerCursorSystem = playerCursorSystem;
             this.playerMenuService = playerMenuService;
@@ -61,10 +74,16 @@ namespace ECS.Startup
                 .Add(new JumpVelocitySystem())
                 .Add(new JumpForceSystem())
                 .Add(new GroundCheckSystem())
+                .Add(new ApplyCollisionDamageSystem(damageService))
+                .Add(new ApplyDamageSystem())
+                .Add(new UpdateHealthBarSystem(updateHealthBarService))
                 .Add(new LifetimeSystem())
                 .Add(new DestroyPlayerMenuSystem(playerMenuService))
                 .Add(new DestroyGameObjectSystem(entityDestroyer))
-                .OneFrame<SpawnBulletSignal>();
+                .OneFrame<SpawnBulletSignal>()
+                .OneFrame<DamageSignal>()
+                .OneFrame<HealthChangedSignal>()
+                .OneFrame<CollisionSignal>();
             systems.Init();
 
             fixedSystems = new EcsSystems(worldProvider.World)

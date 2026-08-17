@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08715574, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0.7, y: 1.625, z: -3.545}
+  m_LocalPosition: {x: 0.35, y: 2.03, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -674,7 +674,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DI.AutomaticSpawnInstaller
   entries:
   - prefab: {fileID: 8332472333706789110, guid: 142ac3badc6814d2db73cf7edc08c07f, type: 3}
-    spawnPoint: {fileID: 0}
+    spawnPoint: {x: 0, y: 0.45, z: -4}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - prefab: {fileID: 1064135258022300331, guid: 65ff4ec87b9d04feb840f1493ebee479, type: 3}
+    spawnPoint: {x: 0, y: 0.45, z: 4}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &907663445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,7 +824,7 @@ Transform:
   m_GameObject: {fileID: 1880000001}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08715574, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0.35, y: 1.625, z: -3.545}
+  m_LocalPosition: {x: 0, y: 2.03, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,6 +1,10 @@
 using System;
 using ECS.Common.Lifecycle.Interfaces;
+using ECS.Gameplay.Damage.Interfaces;
+using ECS.Gameplay.Health.Interfaces;
 using ECS.Gameplay.Shooting.Interfaces;
+using Networking.Mirror.Damage;
+using Networking.Mirror.Health;
 using Networking.Mirror.Lifecycle;
 using Networking.Mirror.Integration;
 using Networking.Mirror.Shooting;
@@ -22,6 +26,24 @@ namespace DI
             Container.Bind<IMirrorServerHandler>()
                 .FromResolveGetter<IEntityDestroyer>(entityDestroyer =>
                     GetServerHandler(entityDestroyer))
+                .AsCached();
+
+            Container
+                .Decorate<IDamageService>()
+                .With<MirrorDamageServiceDecorator>();
+
+            Container.Bind<IMirrorServerHandler>()
+                .FromResolveGetter<IDamageService>(damageService =>
+                    GetServerHandler(damageService))
+                .AsCached();
+
+            Container
+                .Decorate<IUpdateHealthBarService>()
+                .With<MirrorUpdateHealthBarServiceDecorator>();
+
+            Container.Bind<IMirrorServerHandler>()
+                .FromResolveGetter<IUpdateHealthBarService>(updateHealthBarService =>
+                    GetServerHandler(updateHealthBarService))
                 .AsCached();
 
             Container

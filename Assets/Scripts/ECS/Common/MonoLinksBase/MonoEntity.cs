@@ -28,10 +28,22 @@ namespace ECS.Common.MonoLinksBase
         {
             if (!entity.IsAlive())
             {
-                Debug.LogError("MonoEntity is not bound to an alive ECS entity.");
+                return;
             }
 
             entity.Get<T>() = component;
+        }
+
+        public bool TryGet<T>(out T component) where T : struct
+        {
+            if (!entity.IsAlive() || !entity.Has<T>())
+            {
+                component = default;
+                return false;
+            }
+
+            component = entity.Get<T>();
+            return true;
         }
 
         public override void Make(ref EcsEntity entity)
