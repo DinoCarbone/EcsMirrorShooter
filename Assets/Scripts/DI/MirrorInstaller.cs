@@ -37,9 +37,19 @@ namespace DI
                     GetServerHandler(damageService))
                 .AsCached();
 
+            Container.Bind<IMirrorClientHandler>()
+                .FromResolveGetter<IDamageService>(damageService =>
+                    GetClientHandler(damageService))
+                .AsCached();
+
             Container
                 .Decorate<IUpdateHealthBarService>()
                 .With<MirrorUpdateHealthBarServiceDecorator>();
+
+            Container.Bind<IMirrorClientHandler>()
+                .FromResolveGetter<IUpdateHealthBarService>(updateHealthBarService =>
+                    GetClientHandler(updateHealthBarService))
+                .AsCached();
 
             Container.Bind<IMirrorServerHandler>()
                 .FromResolveGetter<IUpdateHealthBarService>(updateHealthBarService =>
@@ -55,8 +65,7 @@ namespace DI
                     GetServerHandler(bulletSpawner))
                 .AsCached();
 
-            Container.Bind<IMirrorServerHandlersProxy>()
-                .To<MirrorServerHandlersProxy>()
+            Container.BindInterfacesTo<MirrorHandlersProxy>()
                 .AsSingle();
 
             Container.BindInterfacesAndSelfTo<ZenjectNetworkManager>()
@@ -73,6 +82,18 @@ namespace DI
             throw new InvalidOperationException(
                 $"{service?.GetType().Name ?? "Service"} does not implement " +
                 $"{nameof(IMirrorServerHandler)}.");
+        }
+
+        private IMirrorClientHandler GetClientHandler(object service)
+        {
+            if (service is IMirrorClientHandler handler)
+            {
+                return handler;
+            }
+
+            throw new InvalidOperationException(
+                $"{service?.GetType().Name ?? "Service"} does not implement " +
+                $"{nameof(IMirrorClientHandler)}.");
         }
     }
 }

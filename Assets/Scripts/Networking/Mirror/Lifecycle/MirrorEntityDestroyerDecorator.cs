@@ -49,12 +49,12 @@ namespace Networking.Mirror.Lifecycle
             return true;
         }
 
-        public void RegisterHandler()
+        public void RegisterServerHandler()
         {
             NetworkServer.RegisterHandler<DestroyEntityMessage>(HandleDestroy);
         }
 
-        public void UnregisterHandler()
+        public void UnregisterServerHandler()
         {
             NetworkServer.UnregisterHandler<DestroyEntityMessage>();
         }

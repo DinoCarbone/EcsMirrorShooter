@@ -8,28 +8,50 @@ namespace Networking.Mirror.Integration
     {
         private IInstantiator instantiator;
         private IMirrorServerHandlersProxy serverHandlersProxy;
+        private IMirrorClientsHandlersProxy clientsHandlersProxy;
 
         [Inject]
         public void Construct(
             IInstantiator prefabInstantiator,
-            IMirrorServerHandlersProxy serverHandlersProxy)
+            IMirrorServerHandlersProxy serverHandlersProxy,
+            IMirrorClientsHandlersProxy clientsHandlersProxy)
         {
             instantiator = prefabInstantiator;
             this.serverHandlersProxy = serverHandlersProxy;
+            this.clientsHandlersProxy = clientsHandlersProxy;
         }
 
         public override void OnStartServer()
         {
             base.OnStartServer();
-            serverHandlersProxy.RegisterHandlers();
+            serverHandlersProxy.RegisterServerHandlers();
         }
 
         public override void OnStopServer()
         {
-            serverHandlersProxy.UnregisterHandlers();
+            serverHandlersProxy.UnregisterServerHandlers();
             base.OnStopServer();
         }
 
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            clientsHandlersProxy.RegisterClientHandlers();
+
+            RegisterZenjectPrefab(playerPrefab);
+
+            foreach (GameObject prefab in spawnPrefabs)
+            {
+                RegisterZenjectPrefab(prefab);
+            }
+        }
+
+        public override void OnStopClient()
+        {
+            clientsHandlersProxy.UnregisterClientHandlers();
+            base.OnStopClient();
+        }
+        
         public override void OnServerAddPlayer(NetworkConnectionToClient connection)
         {
             Transform startPosition = GetStartPosition();
@@ -42,18 +64,7 @@ namespace Networking.Mirror.Integration
             NetworkServer.AddPlayerForConnection(connection, player);
             Debug.Log($"ZenjectNetworkManager.OnServerAddPlayer {player.name}");
         }
-
-        public override void OnStartClient()
-        {
-            base.OnStartClient();
-
-            RegisterZenjectPrefab(playerPrefab);
-
-            foreach (GameObject prefab in spawnPrefabs)
-            {
-                RegisterZenjectPrefab(prefab);
-            }
-        }
+        
         private void RegisterZenjectPrefab(GameObject prefab)
         {
             if (prefab == null)

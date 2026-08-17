@@ -75,6 +75,7 @@ namespace ECS.Startup
                 .Add(new JumpForceSystem())
                 .Add(new GroundCheckSystem())
                 .Add(new ApplyCollisionDamageSystem(damageService))
+                .Add(new DestroyBulletOnCollisionSystem())
                 .Add(new ApplyDamageSystem())
                 .Add(new UpdateHealthBarSystem(updateHealthBarService))
                 .Add(new LifetimeSystem())

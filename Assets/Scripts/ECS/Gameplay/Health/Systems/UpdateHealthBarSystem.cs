@@ -30,7 +30,7 @@ namespace ECS.Gameplay.Health.Systems
                 float normalizedValue = health.MaxValue > 0f
                     ? Mathf.Clamp01(health.Value / health.MaxValue)
                     : 0f;
-
+                
                 updateHealthBarService.SetValue(
                     filter.Get4(index).Value,
                     filter.Get3(index).Value,

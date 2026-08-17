@@ -28,6 +28,7 @@ namespace ECS.Common.MonoLinksBase
         {
             if (!entity.IsAlive())
             {
+                Debug.LogError($"Cannot set {typeof(T)} on an entity that is not alive.");
                 return;
             }
 

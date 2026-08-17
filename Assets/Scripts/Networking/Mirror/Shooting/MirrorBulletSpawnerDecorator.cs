@@ -52,12 +52,12 @@ namespace Networking.Mirror.Shooting
             return null;
         }
 
-        public void RegisterHandler()
+        public void RegisterServerHandler()
         {
             NetworkServer.RegisterHandler<SpawnBulletMessage>(HandleSpawn);
         }
 
-        public void UnregisterHandler()
+        public void UnregisterServerHandler()
         {
             NetworkServer.UnregisterHandler<SpawnBulletMessage>();
         }
