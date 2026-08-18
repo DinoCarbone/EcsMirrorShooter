@@ -5,6 +5,8 @@ using ECS.Common.Cursor.Services;
 using ECS.Common.Menu.Services;
 using ECS.Gameplay.Damage.Interfaces;
 using ECS.Gameplay.Damage.Services;
+using ECS.Gameplay.Death.Interfaces;
+using ECS.Gameplay.Death.Services;
 using ECS.Gameplay.Health.Interfaces;
 using ECS.Gameplay.Health.Services;
 using ECS.Gameplay.Shooting.Interfaces;
@@ -28,6 +30,7 @@ namespace DI
             Container.Bind<IEcsEntityFactory>().To<EcsEntityFactory>().AsSingle();
             Container.Bind<IEntityDestroyer>().To<UnityEntityDestroyer>().AsSingle();
             Container.Bind<IDamageService>().To<EcsDamageService>().AsSingle();
+            Container.Bind<IPlayerDeathService>().To<EcsPlayerDeathService>().AsSingle();
             Container.Bind<IUpdateHealthBarService>().To<UnityUpdateHealthBarService>().AsSingle();
             Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
             Container.Bind<CinemachineCamera>().FromComponentInHierarchy().AsSingle();

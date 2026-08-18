@@ -11,11 +11,14 @@ using ECS.Common.Collision.Components;
 using ECS.Gameplay.Damage.Components;
 using ECS.Gameplay.Damage.Interfaces;
 using ECS.Gameplay.Damage.Systems;
+using ECS.Gameplay.Death.Interfaces;
+using ECS.Gameplay.Death.Systems;
 using ECS.Gameplay.Health.Components;
 using ECS.Gameplay.Health.Interfaces;
 using ECS.Gameplay.Health.Systems;
 using ECS.Gameplay.Jump.Systems;
 using ECS.Gameplay.Movement.Systems;
+using ECS.Gameplay.Rotation.Systems;
 using ECS.Gameplay.Shooting.Components;
 using ECS.Gameplay.Shooting.Interfaces;
 using ECS.Gameplay.Shooting.Systems;
@@ -30,8 +33,9 @@ namespace ECS.Startup
         private readonly IBulletSpawner bulletSpawner;
         private readonly IEntityDestroyer entityDestroyer;
         private readonly IDamageService damageService;
+        private readonly IPlayerDeathService playerDeathService;
         private readonly IUpdateHealthBarService updateHealthBarService;
-        private readonly IPlayerCameraSystem playerCameraSystem;
+        private readonly IPlayerCameraService playerCameraService;
         private readonly IPlayerCursorSystem playerCursorSystem;
         private readonly IPlayerMenuService playerMenuService;
         private EcsSystems systems;
@@ -42,8 +46,9 @@ namespace ECS.Startup
             IBulletSpawner bulletSpawner,
             IEntityDestroyer entityDestroyer,
             IDamageService damageService,
+            IPlayerDeathService playerDeathService,
             IUpdateHealthBarService updateHealthBarService,
-            IPlayerCameraSystem playerCameraSystem,
+            IPlayerCameraService playerCameraService,
             IPlayerCursorSystem playerCursorSystem,
             IPlayerMenuService playerMenuService)
         {
@@ -51,8 +56,9 @@ namespace ECS.Startup
             this.bulletSpawner = bulletSpawner;
             this.entityDestroyer = entityDestroyer;
             this.damageService = damageService;
+            this.playerDeathService = playerDeathService;
             this.updateHealthBarService = updateHealthBarService;
-            this.playerCameraSystem = playerCameraSystem;
+            this.playerCameraService = playerCameraService;
             this.playerCursorSystem = playerCursorSystem;
             this.playerMenuService = playerMenuService;
         }
@@ -60,23 +66,21 @@ namespace ECS.Startup
         public void Initialize()
         {
             systems = new EcsSystems(worldProvider.World)
-                .Add(new BindPlayerCameraSystem(playerCameraSystem))
+                .Add(new BindPlayerCameraSystem(playerCameraService))
                 .Add(new HidePlayerCursorSystem(playerCursorSystem))
                 .Add(new TogglePlayerMenuSystem(playerMenuService))
                 .Add(new PlayertInputMovementSystem())
                 .Add(new PlayertInputJumpSystem())
                 .Add(new PlayerShootInputSystem())
-                .Add(new ResetDisabledPlayerInputSystem(
-                    playerCameraSystem,
-                    playerCursorSystem))
-                .Add(new MoveVelocitySystem())
+                .Add(new ResetDisabledPlayerInputSystem(playerCursorSystem))
+                .Add(new PlayerRotationInputSystem())
+                .Add(new RotatePlayerCameraSystem())
+                .Add(new MovementVelocitySystem())
                 .Add(new SpawnBulletSystem(bulletSpawner))
-                .Add(new JumpVelocitySystem())
-                .Add(new JumpForceSystem())
-                .Add(new GroundCheckSystem())
                 .Add(new ApplyCollisionDamageSystem(damageService))
                 .Add(new DestroyBulletOnCollisionSystem())
                 .Add(new ApplyDamageSystem())
+                .Add(new PlayerDeathSystem(playerDeathService))
                 .Add(new UpdateHealthBarSystem(updateHealthBarService))
                 .Add(new LifetimeSystem())
                 .Add(new DestroyPlayerMenuSystem(playerMenuService))
@@ -88,7 +92,11 @@ namespace ECS.Startup
             systems.Init();
 
             fixedSystems = new EcsSystems(worldProvider.World)
-                .Add(new UpdateRigidbodyPositionSystem());
+                .Add(new ApplyRigidbodyRotationSystem())
+                .Add(new GroundCheckSystem())
+                .Add(new JumpVelocitySystem())
+                .Add(new ApplyRigidbodyVelocitySystem())
+                .Add(new JumpForceSystem());
             fixedSystems.Init();
         }
 

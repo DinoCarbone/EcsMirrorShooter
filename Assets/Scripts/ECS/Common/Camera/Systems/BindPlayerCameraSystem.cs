@@ -7,14 +7,14 @@ namespace ECS.Common.Camera.Systems
 {
     public class BindPlayerCameraSystem : IEcsRunSystem
     {
-        private readonly IPlayerCameraSystem playerCameraSystem;
+        private readonly IPlayerCameraService playerCameraService;
 
         private EcsFilter<PlayerTag, CameraTargetComponent>
             .Exclude<CameraTargetAssignedTag> filter = null;
 
-        public BindPlayerCameraSystem(IPlayerCameraSystem playerCameraSystem)
+        public BindPlayerCameraSystem(IPlayerCameraService playerCameraService)
         {
-            this.playerCameraSystem = playerCameraSystem;
+            this.playerCameraService = playerCameraService;
         }
 
         public void Run()
@@ -27,8 +27,7 @@ namespace ECS.Common.Camera.Systems
                     continue;
                 }
 
-                playerCameraSystem.SetTarget(cameraTarget.Value);
-                playerCameraSystem.EnableRotation();
+                playerCameraService.SetTarget(cameraTarget.Value);
                 filter.GetEntity(index).Get<CameraTargetAssignedTag>();
                 break;
             }

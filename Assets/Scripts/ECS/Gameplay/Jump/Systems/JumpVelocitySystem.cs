@@ -12,7 +12,7 @@ namespace ECS.Gameplay.Jump.Systems
         {
             foreach (var index in filter)
             {
-                var jumpInput = filter.Get1(index);
+                ref var jumpInput = ref filter.Get1(index);
                 var jumpForce = filter.Get2(index);
                 var groundCheck = filter.Get4(index);
                 
@@ -22,7 +22,12 @@ namespace ECS.Gameplay.Jump.Systems
                 {
                     jumpVelocity.Value = Vector3.up * jumpForce.Value;
                 }
-                else jumpVelocity.Value = default;
+                else
+                {
+                    jumpVelocity.Value = default;
+                }
+
+                jumpInput.Value = false;
             }
         }
     }

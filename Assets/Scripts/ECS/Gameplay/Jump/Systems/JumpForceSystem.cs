@@ -15,9 +15,15 @@ namespace ECS.Gameplay.Jump.Systems
             {
                 ref var rigidbody = ref filter.Get1(index);
                 ref var jumpVelocity = ref filter.Get2(index);
+                Vector3 force = jumpVelocity.Value;
+                jumpVelocity.Value = default;
 
-                if (jumpVelocity.Value == default) continue;
-                rigidbody.Value.AddForce(jumpVelocity.Value, ForceMode.Impulse);
+                if (rigidbody.Value == null || force == default)
+                {
+                    continue;
+                }
+
+                rigidbody.Value.AddForce(force, ForceMode.Impulse);
             }
         }
     }

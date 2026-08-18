@@ -2,11 +2,9 @@ using UnityEngine;
 
 namespace ECS.Common.Camera.Interfaces
 {
-    public interface IPlayerCameraSystem
+    public interface IPlayerCameraService
     {
         void SetTarget(Transform target);
         void ClearTarget();
-        void EnableRotation();
-        void DisableRotation();
     }
 }

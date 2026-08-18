@@ -1,8 +1,8 @@
-using ECS.Common.Camera.Interfaces;
 using ECS.Common.Cursor.Interfaces;
 using ECS.Common.Tags;
 using ECS.Gameplay.Jump.Components;
 using ECS.Gameplay.Movement.Components;
+using ECS.Gameplay.Rotation.Components;
 using ECS.Gameplay.Shooting.Components;
 using Leopotam.Ecs;
 
@@ -10,7 +10,6 @@ namespace ECS.Common.Menu.Systems
 {
     public class ResetDisabledPlayerInputSystem : IEcsRunSystem
     {
-        private readonly IPlayerCameraSystem playerCameraSystem;
         private readonly IPlayerCursorSystem playerCursorSystem;
 
         private EcsFilter<PlayerTag> playerFilter = null;
@@ -21,14 +20,15 @@ namespace ECS.Common.Menu.Systems
             MoveInputComponent,
             JumpInputComponent,
             ShootInputComponent> disabledPlayerInputFilter = null;
+        private EcsFilter<
+            PlayerTag,
+            PlayerControlDisabledTag,
+            RotationInputComponent> disabledPlayerRotationInputFilter = null;
 
         private bool wasControlDisabled;
 
-        public ResetDisabledPlayerInputSystem(
-            IPlayerCameraSystem playerCameraSystem,
-            IPlayerCursorSystem playerCursorSystem)
+        public ResetDisabledPlayerInputSystem(IPlayerCursorSystem playerCursorSystem)
         {
-            this.playerCameraSystem = playerCameraSystem;
             this.playerCursorSystem = playerCursorSystem;
         }
 
@@ -51,17 +51,22 @@ namespace ECS.Common.Menu.Systems
             if (isControlDisabled)
             {
                 playerCursorSystem.Show();
-                playerCameraSystem.DisableRotation();
             }
             else if (!playerFilter.IsEmpty())
             {
                 playerCursorSystem.Hide();
-                playerCameraSystem.EnableRotation();
             }
         }
 
         private void ResetInput()
         {
+            foreach (int index in disabledPlayerRotationInputFilter)
+            {
+                ref RotationInputComponent rotationInput = ref
+                    disabledPlayerRotationInputFilter.Get3(index);
+                rotationInput = default;
+            }
+
             foreach (int index in disabledPlayerInputFilter)
             {
                 disabledPlayerInputFilter.Get3(index).Value = default;

@@ -47,6 +47,17 @@ namespace ECS.Common.MonoLinksBase
             return true;
         }
 
+        public bool Remove<T>() where T : struct
+        {
+            if (!entity.IsAlive() || !entity.Has<T>())
+            {
+                return false;
+            }
+
+            entity.Del<T>();
+            return true;
+        }
+
         public override void Make(ref EcsEntity entity)
         {
             if (!entity.IsAlive())

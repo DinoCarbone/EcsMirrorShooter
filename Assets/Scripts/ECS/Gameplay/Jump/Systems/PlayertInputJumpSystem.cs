@@ -15,8 +15,10 @@ namespace ECS.Gameplay.Jump.Systems
             foreach (int index in filter)
             {
                 ref JumpInputComponent jumpInput = ref filter.Get2(index);
-                if (Input.GetKeyDown(KeyCode.Space)) jumpInput.Value = true;
-                else jumpInput.Value = false;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    jumpInput.Value = true;
+                }
             }
         }
     }

@@ -9,22 +9,20 @@ namespace ECS.Common.Camera.Systems
 {
     public class UnbindPlayerCameraSystem : IEcsRunSystem
     {
-        private readonly IPlayerCameraSystem playerCameraSystem;
+        private readonly IPlayerCameraService playerCameraService;
 
         private EcsFilter<PlayerTag, CameraTargetComponent, DestroyRequest> filter = null;
 
-        public UnbindPlayerCameraSystem(IPlayerCameraSystem playerCameraSystem)
+        public UnbindPlayerCameraSystem(IPlayerCameraService playerCameraService)
         {
-            this.playerCameraSystem = playerCameraSystem;
+            this.playerCameraService = playerCameraService;
         }
 
         public void Run()
         {
             foreach (int index in filter)
             {
-                Debug.Log("Unbinding camera");
-                playerCameraSystem.ClearTarget();
-                playerCameraSystem.DisableRotation();
+                playerCameraService.ClearTarget();
                 break;
             }
         }
