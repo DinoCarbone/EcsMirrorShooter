@@ -8,6 +8,7 @@ using ECS.Common.Cursor.Systems;
 using ECS.Common.Menu.Interfaces;
 using ECS.Common.Menu.Systems;
 using ECS.Common.Collision.Components;
+using ECS.Gameplay.Animations.Systems;
 using ECS.Gameplay.Damage.Components;
 using ECS.Gameplay.Damage.Interfaces;
 using ECS.Gameplay.Damage.Systems;
@@ -76,7 +77,9 @@ namespace ECS.Startup
                 .Add(new PlayerRotationInputSystem())
                 .Add(new RotatePlayerCameraSystem())
                 .Add(new MovementVelocitySystem())
+                .Add(new PlayerLocomotionAnimationSystem())
                 .Add(new SpawnBulletSystem(bulletSpawner))
+                .Add(new PlayerFireAnimationSystem())
                 .Add(new ApplyCollisionDamageSystem(damageService))
                 .Add(new DestroyBulletOnCollisionSystem())
                 .Add(new ApplyDamageSystem())
