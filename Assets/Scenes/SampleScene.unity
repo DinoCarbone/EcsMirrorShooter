@@ -613,7 +613,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 907663443}
-  - {fileID: 907663445}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
