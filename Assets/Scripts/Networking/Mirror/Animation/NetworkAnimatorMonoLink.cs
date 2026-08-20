@@ -39,12 +39,18 @@ namespace Networking.Mirror.Animation
 
         public void SetTrigger(int nameHash)
         {
+            if (networkAnimator.netId == 0)
+            {
+                networkAnimator.animator.SetTrigger(nameHash);
+                return;
+            }
+
             networkAnimator.SetTrigger(nameHash);
         }
 
         public void ResetTrigger(int nameHash)
         {
-            networkAnimator.ResetTrigger(nameHash);
+            networkAnimator.animator.ResetTrigger(nameHash);
         }
     }
 }

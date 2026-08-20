@@ -80,6 +80,7 @@ namespace ECS.Startup
                 .Add(new RotatePlayerCameraSystem())
                 .Add(new MovementVelocitySystem())
                 .Add(new PlayerLocomotionAnimationSystem())
+                .Add(new PlayerJumpAnimationSystem())
                 .Add(new SpawnBulletSystem(bulletSpawner))
                 .Add(new PlayerFireAnimationSystem())
                 .Add(new ApplyCollisionDamageSystem(damageService))

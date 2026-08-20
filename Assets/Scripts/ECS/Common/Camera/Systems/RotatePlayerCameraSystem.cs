@@ -8,8 +8,8 @@ namespace ECS.Common.Camera.Systems
 {
     public class RotatePlayerCameraSystem : IEcsRunSystem
     {
-        private const float MinimumPitch = -30f;
-        private const float MaximumPitch = 90f;
+        private const float MinimumPitch = -50f;
+        private const float MaximumPitch = 60f;
 
         private EcsFilter<
             PlayerTag,
