@@ -177,6 +177,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerModel
       objectReference: {fileID: 0}
+    - target: {fileID: 7000000000000000003, guid: c8717dd54324d46f588c2f8c795d7d84, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 7140558303367451117}
+    - target: {fileID: 7000000000000000013, guid: c8717dd54324d46f588c2f8c795d7d84, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 7140558303367451117}
+    - target: {fileID: 7000000000000000023, guid: c8717dd54324d46f588c2f8c795d7d84, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 7140558303367451117}
+    - target: {fileID: 7000000000000000033, guid: c8717dd54324d46f588c2f8c795d7d84, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 7140558303367451117}
+    - target: {fileID: 7000000000000000043, guid: c8717dd54324d46f588c2f8c795d7d84, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 7140558303367451117}
     - target: {fileID: 8632971332391947040, guid: c8717dd54324d46f588c2f8c795d7d84, type: 3}
       propertyPath: m_Data.m_MaxLimit
       value: 100
