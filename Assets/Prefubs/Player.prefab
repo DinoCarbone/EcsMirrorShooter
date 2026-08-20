@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9003856736301882873}
-  - component: {fileID: 8657772144651864329}
   - component: {fileID: 4883729698871217420}
   - component: {fileID: 8249690872779948728}
   - component: {fileID: 3896124699644610518}
@@ -35,19 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2579285505575386867}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8657772144651864329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559930672732095833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7552f247f5a4bec9e08f230c79cf8e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ECS.Common.Animation.MonoLinks.AnimatorMonoLink
-  animator: {fileID: 3335718284356695108}
 --- !u!114 &4883729698871217420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +76,7 @@ MonoBehaviour:
   syncDirection: 1
   syncMode: 0
   syncInterval: 0
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 3335718284356695108}
 --- !u!1 &1542304529718101039
 GameObject:
@@ -283,37 +269,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &2093337831134382351
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8825682835382533453}
-  m_Layer: 0
-  m_Name: ShootPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8825682835382533453
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093337831134382351}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6549013612486711212}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3731573506755852700
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +451,7 @@ Transform:
   m_GameObject: {fileID: 4477911494716488139}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.495, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ECS.Gameplay.Shooting.MonoLinks.BulletSpawnPointMonoLink
   Value:
-    Value: {fileID: 8825682835382533453}
+    Value: {fileID: 5880464651395276649}
 --- !u!114 &2789352165487319406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,13 +743,12 @@ Transform:
   m_GameObject: {fileID: 8332472333706789110}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.35, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2579285505575386867}
   - {fileID: 9166018774338188526}
-  - {fileID: 8825682835382533453}
   - {fileID: 7419026303188001002}
   - {fileID: 3559497178742632496}
   - {fileID: 581471194190912162}
@@ -1085,13 +1039,55 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3200274823850505654, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3052592118727161594}
   m_SourcePrefab: {fileID: 100100000, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
 --- !u!4 &581471194190912162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4220449512455001126, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
   m_PrefabInstance: {fileID: 3639964580211773060}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2227707860588624690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3200274823850505654, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
+  m_PrefabInstance: {fileID: 3639964580211773060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3052592118727161594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227707860588624690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Mirror.Components::Mirror.NetworkTransformReliable
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 4380183202090534967}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChangeCorrectionMultiplier: 2
+  useFixedUpdate: 0
+  rotationSensitivity: 0.01
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!95 &3335718284356695108 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2074218357063547584, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
@@ -1100,5 +1096,10 @@ Animator:
 --- !u!4 &4380183202090534967 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1029716735608719027, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
+  m_PrefabInstance: {fileID: 3639964580211773060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5880464651395276649 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7140558303367451117, guid: 445538756cff64ba1ac242cadb459b80, type: 3}
   m_PrefabInstance: {fileID: 3639964580211773060}
   m_PrefabAsset: {fileID: 0}
