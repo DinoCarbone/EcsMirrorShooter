@@ -8,6 +8,7 @@ using ECS.Common.Cursor.Systems;
 using ECS.Common.Menu.Interfaces;
 using ECS.Common.Menu.Systems;
 using ECS.Common.Collision.Components;
+using ECS.Gameplay.Aiming.Systems;
 using ECS.Gameplay.Animations.Systems;
 using ECS.Gameplay.Damage.Components;
 using ECS.Gameplay.Damage.Interfaces;
@@ -75,6 +76,7 @@ namespace ECS.Startup
                 .Add(new PlayerShootInputSystem())
                 .Add(new ResetDisabledPlayerInputSystem(playerCursorSystem))
                 .Add(new PlayerRotationInputSystem())
+                .Add(new UpdateUpperBodyAimSystem())
                 .Add(new RotatePlayerCameraSystem())
                 .Add(new MovementVelocitySystem())
                 .Add(new PlayerLocomotionAnimationSystem())
