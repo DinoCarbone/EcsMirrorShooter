@@ -37,6 +37,8 @@ namespace ECS.Startup
         private readonly IDamageService damageService;
         private readonly IPlayerDeathService playerDeathService;
         private readonly IUpdateHealthBarService updateHealthBarService;
+        private readonly IHealthBarFactory healthBarFactory;
+        private readonly IHealthBarDestroyer healthBarDestroyer;
         private readonly IPlayerCameraService playerCameraService;
         private readonly IPlayerCursorSystem playerCursorSystem;
         private readonly IPlayerMenuService playerMenuService;
@@ -50,6 +52,8 @@ namespace ECS.Startup
             IDamageService damageService,
             IPlayerDeathService playerDeathService,
             IUpdateHealthBarService updateHealthBarService,
+            IHealthBarFactory healthBarFactory,
+            IHealthBarDestroyer healthBarDestroyer,
             IPlayerCameraService playerCameraService,
             IPlayerCursorSystem playerCursorSystem,
             IPlayerMenuService playerMenuService)
@@ -60,6 +64,8 @@ namespace ECS.Startup
             this.damageService = damageService;
             this.playerDeathService = playerDeathService;
             this.updateHealthBarService = updateHealthBarService;
+            this.healthBarFactory = healthBarFactory;
+            this.healthBarDestroyer = healthBarDestroyer;
             this.playerCameraService = playerCameraService;
             this.playerCursorSystem = playerCursorSystem;
             this.playerMenuService = playerMenuService;
@@ -87,9 +93,11 @@ namespace ECS.Startup
                 .Add(new DestroyBulletOnCollisionSystem())
                 .Add(new ApplyDamageSystem())
                 .Add(new PlayerDeathSystem(playerDeathService))
+                .Add(new SpawnHealthBarSystem(healthBarFactory))
                 .Add(new UpdateHealthBarSystem(updateHealthBarService))
                 .Add(new LifetimeSystem())
                 .Add(new DestroyPlayerMenuSystem(playerMenuService))
+                .Add(new DestroyHealthBarSystem(healthBarDestroyer))
                 .Add(new DestroyGameObjectSystem(entityDestroyer))
                 .OneFrame<SpawnBulletSignal>()
                 .OneFrame<DamageSignal>()

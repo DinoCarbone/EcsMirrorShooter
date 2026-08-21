@@ -1,6 +1,7 @@
 using System;
+using ECS.Common.MonoLinksBase;
+using ECS.Gameplay.Health.Components;
 using ECS.Gameplay.Health.Interfaces;
-using ECS.Gameplay.Health.MonoLinks;
 using global::Mirror;
 using Networking.Mirror.Integration;
 using UnityEngine;
@@ -123,14 +124,16 @@ namespace Networking.Mirror.Health
                 return;
             }
 
-            IHealthBar healthBar = identity.GetComponentInChildren<HealthBarMonoLink>(true);
-            if (healthBar == null)
+            if (!identity.isOwned ||
+                !identity.TryGetComponent(out MonoEntity monoEntity) ||
+                !monoEntity.TryGet(out HealthBarComponent healthBar))
             {
                 return;
             }
+
             updateHealthBarService.SetValue(
                 identity.gameObject,
-                healthBar,
+                healthBar.Value,
                 message.NormalizedValue);
         }
     }

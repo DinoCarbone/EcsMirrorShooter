@@ -1,6 +1,7 @@
 using ECS.Common.Collision.Components;
 using ECS.Common.MonoLinksBase;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace ECS.Common.Collision.MonoLinks
 {
@@ -21,6 +22,16 @@ namespace ECS.Common.Collision.MonoLinks
             }
 
             entity.Get<CollisionSignal>().OtherEntity = collision.gameObject;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!entity.IsAlive())
+            {
+                return;
+            }
+
+            entity.Get<CollisionSignal>().OtherEntity = other.gameObject;
         }
     }
 }

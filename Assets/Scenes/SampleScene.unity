@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DI.EcsInstaller
   playerMenuPrefab: {fileID: 7802455172077395618, guid: 9396b250608c24815a9191ea54afc1dd, type: 3}
-  playerMenuCanvas: {fileID: 1393014440}
+  healthBarPrefab: {fileID: 6617808035669991589, guid: a87753ec25cf14da69b8ecb90de1e50b, type: 3}
 --- !u!114 &907663444
 MonoBehaviour:
   m_ObjectHideFlags: 0
