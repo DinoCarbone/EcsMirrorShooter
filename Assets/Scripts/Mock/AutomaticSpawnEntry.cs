@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Spawn.Automatic
+namespace Mock
 {
     [Serializable]
     public class AutomaticSpawnEntry

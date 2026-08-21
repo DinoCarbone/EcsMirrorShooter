@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using ECS.Startup;
-using UnityEngine;
 using Zenject;
 
-namespace Spawn.Automatic
+namespace Mock
 {
     public class AutomaticSpawnSystem : IInitializable
     {
