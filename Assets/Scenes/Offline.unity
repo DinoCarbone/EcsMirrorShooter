@@ -739,7 +739,6 @@ GameObject:
   - component: {fileID: 907663441}
   - component: {fileID: 907663443}
   - component: {fileID: 907663444}
-  - component: {fileID: 907663445}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -762,7 +761,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 907663443}
-  - {fileID: 907663445}
+  - {fileID: 907663444}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -828,19 +827,6 @@ MonoBehaviour:
   - prefab: {fileID: 1064135258022300331, guid: 65ff4ec87b9d04feb840f1493ebee479, type: 3}
     spawnPoint: {x: 0, y: 0.45, z: 4}
     rotation: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &907663445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907663440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f96315f2c8f4b87a034215f37c6a9d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DI.MirrorInstaller
-  networkManager: {fileID: 7460830401218598012, guid: 34649b2a77e2344ab9effce601401cfa, type: 3}
 --- !u!1 &1324930774
 GameObject:
   m_ObjectHideFlags: 0
